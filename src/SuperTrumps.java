@@ -51,7 +51,7 @@ public class SuperTrumps extends Card{
             desc = "changes the trumps category to Economic Value";
         }
         else if (n == "The Petrologist"){
-            desc = "changes the trumps category to Crustal Abundance";
+            desc = "changes the trumps category to Crystal Abundance";
         }
         return desc;
     }
