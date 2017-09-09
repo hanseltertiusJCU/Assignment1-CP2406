@@ -31,7 +31,7 @@ public class SuperTrumps extends Card{
         return cardEffect;
     }
 
-    public String EffectDescription()
+    public String effectDescription()
     {
         String desc = "";
         String n = getCardName();

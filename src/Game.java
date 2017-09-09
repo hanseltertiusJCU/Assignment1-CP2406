@@ -91,8 +91,62 @@ public class Game {
     }
 
     // TO DO: add the flow of the card played after creating player constructor
+    public boolean gameCard(Card card, Player play){
+        boolean higherScore = false;
+        int difference = 0;
+        if(cardUsed.size() == 0 || this.playerGetAnotherTurn(play)){
+            if (card instanceof SuperTrumps){
+                gameMode = ((SuperTrumps) card).cardEffect();
+            }
+            higherScore = true;
+        }
+        else{
+            if (card instanceof Mineral){
+                if (getRecentCard() instanceof Mineral){
+                    if (gameMode == "Hardness"){
+                        Float now = new Float(((Mineral) card).getCardHardness());
+                        Float prev = new Float(((Mineral) getRecentCard()).getCardHardness());
+                        difference = now.compareTo(prev);
+                    }
+                    else if (gameMode == "SpecGrav"){
+                        Float now = new Float(((Mineral) card).getCardSpecGravity());
+                        Float prev = new Float(((Mineral) getRecentCard()).getCardSpecGravity());
+                        difference = now.compareTo(prev);
+                    }
+                    else if (gameMode == "Economy"){
+                        Float now = new Float(((Mineral) card).getCardEconomicValueScore());
+                        Float prev = new Float(((Mineral) getRecentCard()).getCardEconomicValueScore());
+                        difference = now.compareTo(prev);
+                    }
+                    else if (gameMode == "Abundance"){
+                        Float now = new Float(((Mineral) card).getCardCrystalAbundanceScore());
+                        Float prev = new Float(((Mineral) getRecentCard()).getCardCrystalAbundanceScore());
+                        difference = now.compareTo(prev);
+                    }
+                    else if (gameMode == "Cleavage"){
+                        Float now = new Float(((Mineral) card).getCardCleavageScore());
+                        Float prev = new Float(((Mineral) getRecentCard()).getCardCleavageScore());
+                        difference = now.compareTo(prev);
+                    }
+                    if (difference > 0){
+                        higherScore = true;
+                    }
+                    else{
+                        System.out.println("Invalid choice, your card doesn't have enough value compared to the recent card in the game");
+                    }
+                } else {
+                    higherScore = true;
+                }
+            }
+            else {
+                setGameMode(((SuperTrumps) card).cardEffect());
+                higherScore = true;
+            }
+        }
+        return higherScore;
+    }
 
-    public void putCardToTable(Card card){
+    public void putCardToGame(Card card){
         cardUsed.add(card);
     }
 
@@ -105,8 +159,12 @@ public class Game {
         this.recentPlayer = recentPlayerTurn;
     }
 
-    //TO DO: add a method to check whether all other players passed or not
-
-
+    public boolean playerGetAnotherTurn(Player playerGame){
+        boolean another = false;
+        if (getRecentPlayer().equals(playerGame.getPlayerName())){
+            another = true;
+        }
+        return another;
+    }
 
 }
