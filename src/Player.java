@@ -22,7 +22,7 @@ public class Player {
     public void drawPlayerCard(Card card){
         playerHand.add(card);
     }
-    
+
     public void playerTurn(Game game){
         int cardHandNum;
         boolean nextPlayer = false;

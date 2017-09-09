@@ -11,12 +11,13 @@ public class Game {
 
     Game(int playerNum, Deck deck){
         gameMode = "";
-        cardUsed = new ArrayList<>();
-        players = new ArrayList<>();
+        cardUsed = new ArrayList<Card>();
+        players = new ArrayList<Player>();
         cardDeck = deck;
         recentPlayer = "";
         for(int p = 0; p < playerNum; p++){
-            System.out.println("Enter player name\n>>>"); // add while loop when the name input is empty
+            System.out.println("Enter player name");
+            System.out.print(">>>");// add while loop when the name input is empty
             Scanner playerName = new Scanner(System.in);
             String getPlayerName = playerName.nextLine();
             players.add(new Player(getPlayerName));//to be fixed later on
@@ -56,14 +57,16 @@ public class Game {
         this.gameMode = gameMode;
     }
 
-    public void restoreDeck(){
-        ArrayList<Card> reset = new ArrayList<>();
-        for (Card cards: cardUsed){
-            reset.add(cards);
+    public void restoreDeck()
+    {
+        ArrayList<Card> restore = new ArrayList<>();
+        for (Card cards: cardUsed)
+        {
+            restore.add(cards);
         }
-        setCardDeck(new Deck(reset));
+        setCardDeck(new Deck(restore));
         cardUsed.clear();
-        cardUsed.add(reset.get(reset.size()-1));
+        cardUsed.add(restore.get(restore.size()-1));
     }
 
     public void setCardDeck(Deck cardDeck){

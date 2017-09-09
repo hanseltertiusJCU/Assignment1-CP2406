@@ -18,7 +18,7 @@ public class Deck {
         return getCard;
     }
 
-    public ArrayList<Card> getCardDeck() {
+    public ArrayList<Card> getCardDeckContent() {
         return cardDeck;
     }
 }
