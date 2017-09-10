@@ -59,49 +59,49 @@ public class Mineral extends Card{
     public int convertCleavageScore(){
         int cleavageScore = 0;
         String c = getCardCleavage();
-        if(c == "none"){
+        if(c.equals("none")){
             cleavageScore = 1;
         }
-        else if(c == "poor/none"){
+        else if(c.equals("poor/none")){
             cleavageScore = 2;
         }
-        else if (c == "1 poor"){
+        else if (c.equals("1 poor")){
             cleavageScore = 3;
         }
-        else if (c == "2 poor"){
+        else if (c.equals("2 poor")){
             cleavageScore = 4;
         }
-        else if (c == "1 good"){
+        else if (c.equals("1 good")){
             cleavageScore = 5;
         }
-        else if (c == "1 good/1 poor"){
+        else if (c.equals("1 good/1 poor")){
             cleavageScore = 6;
         }
-        else if (c == "2 good"){
+        else if (c.equals("2 good")){
             cleavageScore = 7;
         }
-        else if (c == "3 good"){
+        else if (c.equals("3 good")){
             cleavageScore = 8;
         }
-        else if (c == "1 perfect"){
+        else if (c.equals("1 perfect")){
             cleavageScore = 9;
         }
-        else if (c == "1 perfect/1 good"){
+        else if (c .equals("1 perfect/1 good")){
             cleavageScore = 10;
         }
-        else if (c == "1 perfect/2 good"){
+        else if (c.equals("1 perfect/2 good")){
             cleavageScore = 11;
         }
-        else if (c == "2 perfect/1 good"){
+        else if (c.equals("2 perfect/1 good")){
             cleavageScore = 12;
         }
-        else if (c == "3 perfect"){
+        else if (c.equals("3 perfect")){
             cleavageScore = 13;
         }
-        else if (c == "4 perfect"){
+        else if (c.equals("4 perfect")){
             cleavageScore = 14;
         }
-        else if (c == "6 perfect"){
+        else if (c.equals("6 perfect")){
             cleavageScore = 15;
         }
         return cleavageScore;
@@ -109,50 +109,50 @@ public class Mineral extends Card{
     }
 
     public int convertAbundanceScore(){
-        int abundanceValue = 0;
+        int abundanceScore = 0;
         String a = getCardCrystalAbundance();
-        if (a == "ultratrace"){
-            abundanceValue = 1;
+        if (a.equals("ultratrace")){
+            abundanceScore = 1;
         }
-        else if (a == "trace"){
-            abundanceValue = 2;
+        else if (a.equals("trace")){
+            abundanceScore = 2;
         }
-        else if (a == "low"){
-            abundanceValue = 3;
+        else if (a.equals("low")){
+            abundanceScore = 3;
         }
-        else if (a == "moderate"){
-            abundanceValue = 4;
+        else if (a.equals("moderate")){
+            abundanceScore = 4;
         }
-        else if (a == "high"){
-            abundanceValue = 5;
+        else if (a.equals("high")){
+            abundanceScore = 5;
         }
-        else if (a == "very high"){
-            abundanceValue = 6;
+        else if (a.equals("very high")){
+            abundanceScore = 6;
         }
-        return abundanceValue;
+        return abundanceScore;
     }
 
     public int convertEconomicScore(){
-        int economicValue = 0;
+        int economicScore = 0;
         String e = getCardEconomicValue();
-        if (e == "trivial"){
-            economicValue = 1;
+        if (e.equals("trivial")){
+            economicScore = 1;
         }
-        else if (e == "low"){
-            economicValue = 2;
+        else if (e.equals("low")){
+            economicScore = 2;
         }
-        else if (e == "moderate"){
-            economicValue = 3;
+        else if (e.equals("moderate")){
+            economicScore = 3;
         }
-        else if (e == "high"){
-            economicValue = 4;
+        else if (e.equals("high")){
+            economicScore = 4;
         }
-        else if (e == "very high"){
-            economicValue = 5;
+        else if (e.equals("very high")){
+            economicScore = 5;
         }
-        else if (e == "I'm rich!"){
-            economicValue = 6;
+        else if (e.equals("I'm rich!")){
+            economicScore = 6;
         }
-        return economicValue;
+        return economicScore;
     }
 }

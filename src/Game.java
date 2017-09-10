@@ -16,15 +16,22 @@ public class Game {
         cardDeck = deck;
         recentPlayer = "";
         for(int p = 0; p < playerNum; p++){
+
             System.out.println("Enter player name");
-            System.out.print(">>>");// add while loop when the name input is empty
+            System.out.print(">>>");
             Scanner playerName = new Scanner(System.in);
             String getPlayerName = playerName.nextLine();
+            while (getPlayerName.length() == 0){
+                System.out.println("The name cannot be empty!");
+                System.out.println("Enter player name");
+                System.out.print(">>>");
+                getPlayerName = playerName.nextLine();
+            }
             players.add(new Player(getPlayerName));//to be fixed later on
         }
         for (int h = 0; h < 8; h++){
             for (Player player : players){
-                //drawcard from deck (to be added in player class)
+                player.drawPlayerCard(deck.drawnCard());
             }
         }
     }
@@ -33,21 +40,22 @@ public class Game {
         return gameMode;
     }
 
-    public String getGameModeMessage(){
+    public String getGameModeMessage()
+    {
         String gameMsg = "";
-        if (gameMode == "HARD"){
+        if (gameMode.equals("HARD")){
             gameMsg = "This is a game of hardness";
         }
-        else if (gameMode == "SPECGRAV"){
+        else if (gameMode.equals("SPECGRAV")){
             gameMsg = "This is a game of specific gravity";
         }
-        else if (gameMode == "ECO"){
+        else if (gameMode.equals("ECO")){
             gameMsg = "This is a game of economic value";
         }
-        else if (gameMode == "ABU"){
+        else if (gameMode.equals("ABU")){
             gameMsg = "This is a game of crystal abundance";
         }
-        else if (gameMode == "CLE"){
+        else if (gameMode.equals("CLE")){
             gameMsg = "This is a game of cleavage";
         }
         return gameMsg;
@@ -93,45 +101,48 @@ public class Game {
         return cardDeck;
     }
 
-    // TO DO: add the flow of the card played after creating player constructor
     public boolean gameCard(Card card, Player play){
         boolean higherScore = false;
         int difference = 0;
-        if(cardUsed.size() == 0 || this.playerGetAnotherTurn(play)){
-            if (card instanceof SuperTrumps){
+        if(cardUsed.size() == 0 || this.playerGetAnotherTurn(play))
+        {
+            if (card instanceof SuperTrumps)
+            {
                 gameMode = ((SuperTrumps) card).cardEffect();
             }
             higherScore = true;
         }
-        else{
+        else
+        {
             if (card instanceof Mineral){
                 if (getRecentCard() instanceof Mineral){
-                    if (gameMode == "HARD"){
+                    if (gameMode.equals("HARD")){
                         Float now = new Float(((Mineral) card).getCardHardness());
                         Float prev = new Float(((Mineral) getRecentCard()).getCardHardness());
                         difference = now.compareTo(prev);
                     }
-                    else if (gameMode == "SPECGRAV"){
+                    else if (gameMode.equals("SPECGRAV")){
                         Float now = new Float(((Mineral) card).getCardSpecGravity());
                         Float prev = new Float(((Mineral) getRecentCard()).getCardSpecGravity());
                         difference = now.compareTo(prev);
                     }
-                    else if (gameMode == "ECO"){
+                    else if (gameMode.equals("ECO")){
                         Float now = new Float(((Mineral) card).getCardEconomicValueScore());
                         Float prev = new Float(((Mineral) getRecentCard()).getCardEconomicValueScore());
                         difference = now.compareTo(prev);
                     }
-                    else if (gameMode == "ABU"){
+                    else if (gameMode.equals("ABU")){
                         Float now = new Float(((Mineral) card).getCardCrystalAbundanceScore());
                         Float prev = new Float(((Mineral) getRecentCard()).getCardCrystalAbundanceScore());
                         difference = now.compareTo(prev);
                     }
-                    else if (gameMode == "ClE"){
+                    else if (gameMode.equals("CLE")){
                         Float now = new Float(((Mineral) card).getCardCleavageScore());
                         Float prev = new Float(((Mineral) getRecentCard()).getCardCleavageScore());
                         difference = now.compareTo(prev);
                     }
-                    if (difference > 0){
+                    if (difference > 0)
+                    {
                         higherScore = true;
                     }
                     else{
@@ -164,7 +175,8 @@ public class Game {
 
     public boolean playerGetAnotherTurn(Player playerGame){
         boolean another = false;
-        if (getRecentPlayer().equals(playerGame.getPlayerName())){
+        if (getRecentPlayer().equals(playerGame.getPlayerName()))
+        {
             another = true;
         }
         return another;

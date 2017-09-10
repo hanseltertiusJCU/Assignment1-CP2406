@@ -6,30 +6,41 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args)
     {
-        int numPlayer;
+
         ArrayList<Card> listCard = new ArrayList<>();
         String[] fileArray;
         String fileString = "";
 
-        System.out.println("Enter the number of players (3-5 players)" );
-        System.out.print(">>>");
-        Scanner num = new Scanner(System.in);
-        numPlayer = num.nextInt();
+        int numPlayer = 0;
+        Boolean repeat = true;
 
-        while (!(numPlayer >= 3 && numPlayer <= 5)) {
-            System.out.println("The number of players are not matching the specified criteria");
-            System.out.println("Enter the number of players (3-5 players)");
-            System.out.print(">>>");
-            numPlayer = num.nextInt();
+
+        while (repeat)
+        {
+            Scanner num = new Scanner(System.in);
+            try
+            {
+                System.out.println("Enter the number of players (3-5 players)");
+                System.out.print(">>>");
+                numPlayer = num.nextInt();
+                repeat = false;
+            if (numPlayer < 3 || numPlayer > 5)   {
+                System.out.println("Number not match");
+                repeat = true;
+            }
+            } catch (Exception e)
+            {
+                System.out.println("Input mismatch!");
+                repeat = true;
+
+            }
         }
-        //making the loop acceptable in the different type of input beside num player
 
         Path file = Paths.get("D:\\Bachelor of IT\\CP2406\\Assignment\\Assignment1CP2406\\src\\card.txt");
         try{
@@ -46,7 +57,6 @@ public class Main {
             listCard.add(new SuperTrumps("The Petrologist"));
             listCard.add(new SuperTrumps("The Miner"));
             listCard.add(new SuperTrumps("The Gemmologist"));
-            System.out.println(listCard);
         }
         catch (Exception e){
             System.out.println("Message: " + e.getMessage());

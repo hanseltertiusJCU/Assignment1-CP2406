@@ -29,7 +29,7 @@ public class Player {
         String recentCardDesc;
         if(game.cardPlayed() && !(game.playerGetAnotherTurn(this))){
             if(game.getRecentCard() instanceof Mineral){
-                recentCardDesc = "\n Recent card = Name: " + game.getRecentCard().getCardName() + "  " +
+                recentCardDesc = "\nRecent card = Name: " + game.getRecentCard().getCardName() + "  " +
                         "Hardness: " + ((Mineral) game.getRecentCard()).getCardHardness() + "  " +
                         "Specific Gravity: " + ((Mineral) game.getRecentCard()).getCardSpecGravity() + "  " +
                         "Cleavage: " + ((Mineral) game.getRecentCard()).getCardCleavage() + "  " +
@@ -51,7 +51,8 @@ public class Player {
         }
         while (!nextPlayer){
             String playerChoice;
-            System.out.println("Game mode: " + game.getGameMode() + "\n" + recentCardDesc + "\n" + showCardInHand() + "\n" + getPlayerName() + ", enter the card number you want to play or simply enter PASS to pass" + "\n>>>");
+            System.out.println("Game mode: " + game.getGameModeMessage() + "\n" + recentCardDesc + "\n" + showCardInHand() + getPlayerName() + ", enter the card number you want to play or simply enter PASS to pass");
+            System.out.print(">>>");
             Scanner options = new Scanner(System.in);
             playerChoice = options.nextLine();
             if (playerChoice.toUpperCase().equals("PASS")){
@@ -133,7 +134,7 @@ public class Player {
                         "Economic Value: " + ((Mineral) cards).getCardEconomicValue() + "\n";//making the desc works
             }
             else{
-                cardDesc = "No: "+ cardNum+ "   "+ "Name: " + cards.getCardName()+ "   " + "Description: " +
+                cardDesc = "No: "+ cardNum+ "  " + "Name: " + cards.getCardName()+ "   " + "Description: " +
                         ((SuperTrumps) cards).effectDescription()+ "\n";
             }
             cardNum += 1;
@@ -144,13 +145,13 @@ public class Player {
 
     public void gameStart(Game starter){
         String getGameMode;
-        System.out.println("Enter the mode you want to play. Player: " + getPlayerName() + "\n" + showCardInHand() + "\n(HARD) Hardness" +"\n(SPECGRAV) Specific Gravity" + "\n(CLE) Cleavage" + "\n(ABU) Crystal Abundance" + "\n(ECO) Economic Value");
+        System.out.println("Enter the mode you want to play. Player: " + getPlayerName() + "\n" + showCardInHand() + "(HARD) Hardness" +"\n(SPECGRAV) Specific Gravity" + "\n(CLE) Cleavage" + "\n(ABU) Crystal Abundance" + "\n(ECO) Economic Value");
         System.out.print(">>>");
         Scanner gameMode = new Scanner(System.in);
         getGameMode = gameMode.nextLine();
         while (!(getGameMode.equals("HARD") || getGameMode.equals("SPECGRAV") || getGameMode.equals("ECO") || getGameMode.equals("ABU") || getGameMode.equals("CLE") || getGameMode .equals("hard") || getGameMode.equals("specgrav") || getGameMode.equals("eco") || getGameMode.equals("abu") || getGameMode.equals("cle"))){
             System.out.println("Invalid game mode!");
-            System.out.println("Enter the mode you want to play. Player: " + getPlayerName() + "\n" + showCardInHand() + "\n(HARD) Hardness" +"\n(SPECGRAV) Specific Gravity" + "\n(CLE) Cleavage" + "\n(ABU) Crystal Abundance" + "\n(ECO) Economic Value");
+            System.out.println("Enter the mode you want to play. Player: " + getPlayerName() + "\n" + showCardInHand() + "(HARD) Hardness" +"\n(SPECGRAV) Specific Gravity" + "\n(CLE) Cleavage" + "\n(ABU) Crystal Abundance" + "\n(ECO) Economic Value");
             System.out.print(">>>");
             getGameMode = gameMode.nextLine();
         }
@@ -170,6 +171,6 @@ public class Player {
 
     public void playerLeft(Game game){
         game.getPlayers().remove(this);
-        System.out.println("Player " + this.getPlayerName() + "has left the game");
+        System.out.println("Player " + this.getPlayerName() + " has left the game");
     }
 }
