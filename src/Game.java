@@ -35,19 +35,19 @@ public class Game {
 
     public String getGameModeMessage(){
         String gameMsg = "";
-        if (gameMode == "Hardness"){
+        if (gameMode == "HARD"){
             gameMsg = "This is a game of hardness";
         }
-        else if (gameMode == "SpecGrav"){
+        else if (gameMode == "SPECGRAV"){
             gameMsg = "This is a game of specific gravity";
         }
-        else if (gameMode == "Economy"){
+        else if (gameMode == "ECO"){
             gameMsg = "This is a game of economic value";
         }
-        else if (gameMode == "Abundance"){
+        else if (gameMode == "ABU"){
             gameMsg = "This is a game of crystal abundance";
         }
-        else if (gameMode == "Cleavage"){
+        else if (gameMode == "CLE"){
             gameMsg = "This is a game of cleavage";
         }
         return gameMsg;
@@ -106,27 +106,27 @@ public class Game {
         else{
             if (card instanceof Mineral){
                 if (getRecentCard() instanceof Mineral){
-                    if (gameMode == "Hardness"){
+                    if (gameMode == "HARD"){
                         Float now = new Float(((Mineral) card).getCardHardness());
                         Float prev = new Float(((Mineral) getRecentCard()).getCardHardness());
                         difference = now.compareTo(prev);
                     }
-                    else if (gameMode == "SpecGrav"){
+                    else if (gameMode == "SPECGRAV"){
                         Float now = new Float(((Mineral) card).getCardSpecGravity());
                         Float prev = new Float(((Mineral) getRecentCard()).getCardSpecGravity());
                         difference = now.compareTo(prev);
                     }
-                    else if (gameMode == "Economy"){
+                    else if (gameMode == "ECO"){
                         Float now = new Float(((Mineral) card).getCardEconomicValueScore());
                         Float prev = new Float(((Mineral) getRecentCard()).getCardEconomicValueScore());
                         difference = now.compareTo(prev);
                     }
-                    else if (gameMode == "Abundance"){
+                    else if (gameMode == "ABU"){
                         Float now = new Float(((Mineral) card).getCardCrystalAbundanceScore());
                         Float prev = new Float(((Mineral) getRecentCard()).getCardCrystalAbundanceScore());
                         difference = now.compareTo(prev);
                     }
-                    else if (gameMode == "Cleavage"){
+                    else if (gameMode == "ClE"){
                         Float now = new Float(((Mineral) card).getCardCleavageScore());
                         Float prev = new Float(((Mineral) getRecentCard()).getCardCleavageScore());
                         difference = now.compareTo(prev);

@@ -54,7 +54,7 @@ public class Player {
             System.out.println("Game mode: " + game.getGameMode() + "\n" + recentCardDesc + "\n" + showCardInHand() + "\n" + getPlayerName() + ", enter the card number you want to play or simply enter PASS to pass" + "\n>>>");
             Scanner options = new Scanner(System.in);
             playerChoice = options.nextLine();
-            if (playerChoice.toUpperCase() == "PASS"){
+            if (playerChoice.toUpperCase().equals("PASS")){
                 drawPlayerCard(game.getCardDeck().drawnCard());
                 nextPlayer = true;
             }
@@ -63,14 +63,14 @@ public class Player {
                     cardHandNum = Integer.parseInt(playerChoice);
                     Card cardPlayed = getPlayerCard(cardHandNum);
                     boolean continueGame = game.gameCard(cardPlayed, this);
-                    if(game.getGameMode() == "Choice"){
+                    if(game.getGameMode().equals("CHOICE")){
                         game.putCardToGame(cardPlayed);
                         playerHand.remove((cardHandNum));
                         gameStart(game);
                         game.setRecentPlayer(this.getPlayerName());
                         nextPlayer = true;
                     }
-                    else if (game.getGameMode() == "Gravity/Magnetite")
+                    else if (game.getGameMode().equals("GRAV/MAG"))
                     {
                         if(lookAtWinCard())
                         {
@@ -80,12 +80,12 @@ public class Player {
                                 playerHand.remove((cardInHand));
                                 game.setRecentPlayer(this.getPlayerName());
                             }
-                            game.setGameMode("SpecGrav");
+                            game.setGameMode("SPECGRAV");
                             nextPlayer = true;
                         }
                         else
                         {
-                            game.setGameMode("SpecGrav");
+                            game.setGameMode("SPECGRAV");
                         }
                         if(continueGame){
                             game.putCardToGame(cardPlayed);
@@ -114,41 +114,47 @@ public class Player {
         }
     }
 
-    public void gameStart(Game starter){
-        String getGameMode;
-        System.out.println("Enter the mode you want to play. Player: " + getPlayerName() + "\nHardness" +"\nSpecific Gravity" + "\nCleavage" + "\nCrystal Abundance" + "\nEconomic Value" + "\n>>>");
-        Scanner gameMode = new Scanner(System.in);
-        getGameMode = gameMode.nextLine();
-        while (!(getGameMode == "Hardness" || getGameMode == "SpecGrav" || getGameMode == "Economy" || getGameMode == "Abundance" || getGameMode == "Cleavage" )){
-            System.out.println("Invalid game mode!");
-            System.out.println("Enter the mode you want to play. Player: " + getPlayerName() + "\nHardness" +"\nSpecific Gravity" + "\nCleavage" + "\nCrystal Abundance" + "\nEconomic Value" + "\n>>>");
-            getGameMode = gameMode.nextLine();
-        }
-        starter.setGameMode(getGameMode);
-    }
 
     public String showCardInHand(){
+
         String handCard = "";
         int cardNum = 0;
-        for(Card card: playerHand){
-            String cardDesc = "";
-            if (card instanceof Mineral){
+        for(Card cards: playerHand)
+        {
+            String cardDesc;
+            if (cards instanceof Mineral)
+            {
                 cardDesc = "No: " + cardNum + "  " +
-                        "Name: " + card.getCardName() + "  " +
-                        "Hardness: " + ((Mineral) card).getCardHardness() + "  " +
-                        "Specific Gravity: " + ((Mineral) card).getCardSpecGravity() + "  " +
-                        "Cleavage: " + ((Mineral) card).getCardCleavage() + "  " +
-                        "Crystal Abundance: " + ((Mineral) card).getCardCrystalAbundance() + "  " +
-                        "Economic Value: " + ((Mineral) card).getCardEconomicValue() + "  " + "\n";
+                        "Name: " + cards.getCardName() + "  " +
+                        "Hardness: " + ((Mineral) cards).getCardHardness() + "  " +
+                        "Specific Gravity: " + ((Mineral) cards).getCardSpecGravity() + "  " +
+                        "Cleavage: " + ((Mineral) cards).getCardCleavage() + "  " +
+                        "Crystal Abundance: " + ((Mineral) cards).getCardCrystalAbundance() + "  " +
+                        "Economic Value: " + ((Mineral) cards).getCardEconomicValue() + "\n";//making the desc works
             }
             else{
-                cardDesc = "No: "+ cardNum+ "   "+ "Name: " + card.getCardName()+ "   " + "Description: " +
-                        ((SuperTrumps) card).effectDescription()+ "\n";
+                cardDesc = "No: "+ cardNum+ "   "+ "Name: " + cards.getCardName()+ "   " + "Description: " +
+                        ((SuperTrumps) cards).effectDescription()+ "\n";
             }
             cardNum += 1;
             handCard += cardDesc;
         }
         return handCard;
+    }
+
+    public void gameStart(Game starter){
+        String getGameMode;
+        System.out.println("Enter the mode you want to play. Player: " + getPlayerName() + "\n" + showCardInHand() + "\n(HARD) Hardness" +"\n(SPECGRAV) Specific Gravity" + "\n(CLE) Cleavage" + "\n(ABU) Crystal Abundance" + "\n(ECO) Economic Value");
+        System.out.print(">>>");
+        Scanner gameMode = new Scanner(System.in);
+        getGameMode = gameMode.nextLine();
+        while (!(getGameMode.equals("HARD") || getGameMode.equals("SPECGRAV") || getGameMode.equals("ECO") || getGameMode.equals("ABU") || getGameMode.equals("CLE") || getGameMode .equals("hard") || getGameMode.equals("specgrav") || getGameMode.equals("eco") || getGameMode.equals("abu") || getGameMode.equals("cle"))){
+            System.out.println("Invalid game mode!");
+            System.out.println("Enter the mode you want to play. Player: " + getPlayerName() + "\n" + showCardInHand() + "\n(HARD) Hardness" +"\n(SPECGRAV) Specific Gravity" + "\n(CLE) Cleavage" + "\n(ABU) Crystal Abundance" + "\n(ECO) Economic Value");
+            System.out.print(">>>");
+            getGameMode = gameMode.nextLine();
+        }
+        starter.setGameMode(getGameMode.toUpperCase());
     }
 
     public boolean lookAtWinCard(){

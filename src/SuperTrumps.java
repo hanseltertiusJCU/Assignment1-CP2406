@@ -11,22 +11,22 @@ public class SuperTrumps extends Card{
         String cardEffect = "";
         String n = getCardName();
         if (n == "The Mineralogist"){
-            cardEffect = "Cleavage";
+            cardEffect = "CLE";
         }
         else if (n == "The Geologist"){
-            cardEffect = "Choice";
+            cardEffect = "CHOICE";
         }
         else if (n == "The Geophysicist"){
-            cardEffect = "Gravity/Magnetite";
+            cardEffect = "GRAV/MAG";
         }
         else if (n == "The Gemmologist"){
-            cardEffect = "Hardness";
+            cardEffect = "HARD";
         }
         else if (n == "The Miner"){
-            cardEffect = "Economy";
+            cardEffect = "ECO";
         }
         else if (n == "The Petrologist"){
-            cardEffect = "Abundance";
+            cardEffect = "ABU";
         }
         return cardEffect;
     }

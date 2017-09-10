@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -21,12 +22,15 @@ public class Main {
         System.out.print(">>>");
         Scanner num = new Scanner(System.in);
         numPlayer = num.nextInt();
-        while (!(numPlayer >= 3 && numPlayer <= 5)){
+
+        while (!(numPlayer >= 3 && numPlayer <= 5)) {
             System.out.println("The number of players are not matching the specified criteria");
-            System.out.println("Enter the number of players (3-5 players)" );
+            System.out.println("Enter the number of players (3-5 players)");
             System.out.print(">>>");
             numPlayer = num.nextInt();
         }
+        //making the loop acceptable in the different type of input beside num player
+
         Path file = Paths.get("D:\\Bachelor of IT\\CP2406\\Assignment\\Assignment1CP2406\\src\\card.txt");
         try{
             InputStream fileInput = new BufferedInputStream(Files.newInputStream(file));
@@ -42,6 +46,7 @@ public class Main {
             listCard.add(new SuperTrumps("The Petrologist"));
             listCard.add(new SuperTrumps("The Miner"));
             listCard.add(new SuperTrumps("The Gemmologist"));
+            System.out.println(listCard);
         }
         catch (Exception e){
             System.out.println("Message: " + e.getMessage());
