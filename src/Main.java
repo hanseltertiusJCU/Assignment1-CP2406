@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args)
     {
-
+        // Main program of the game
         ArrayList<Card> listCard = new ArrayList<>();
         String[] fileArray;
         String fileString = "";
@@ -21,29 +21,26 @@ public class Main {
         Boolean repeat = true;
 
 
-        while (repeat)
-        {
+        while (repeat) {
+            // Used to repeat the input when the input does not match the criteria
             Scanner num = new Scanner(System.in);
-            try
-            {
+            try {
                 System.out.println("Enter the number of players (3-5 players)");
                 System.out.print(">>>");
                 numPlayer = num.nextInt();
                 repeat = false;
-            if (numPlayer < 3 || numPlayer > 5)   {
-                System.out.println("Number not match");
+                if (numPlayer < 3 || numPlayer > 5)   {
+                    System.out.println("The amount of players does not match the specified criteria");
+                    repeat = true;
+                }
+            } catch (Exception e) {
+                System.out.println("The input type does not match the specified criteria");
                 repeat = true;
-            }
-            } catch (Exception e)
-            {
-                System.out.println("Input mismatch!");
-                repeat = true;
-
             }
         }
 
-        Path file = Paths.get("D:\\Bachelor of IT\\CP2406\\Assignment\\Assignment1CP2406\\src\\card.txt");
-        try{
+        Path file = Paths.get("D:\\Bachelor of IT\\CP2406\\Assignment\\Assignment1CP2406\\src\\card.txt"); // Used for file reading (change directory for different computers, otherwise it won't work)
+        try {
             InputStream fileInput = new BufferedInputStream(Files.newInputStream(file));
             BufferedReader fileReader = new BufferedReader(new InputStreamReader(fileInput));
             fileReader.readLine();
@@ -51,6 +48,7 @@ public class Main {
                 fileArray = fileString.split(",");
                 listCard.add(new Mineral(fileArray[0], Float.valueOf(fileArray[1]), Float.valueOf(fileArray[2]),fileArray[3],fileArray[4],fileArray[5]));
             }
+            // Adding the Supertrump card
             listCard.add(new SuperTrumps("The Mineralogist"));
             listCard.add(new SuperTrumps("The Geologist"));
             listCard.add(new SuperTrumps("The Geophysicist"));
@@ -65,13 +63,14 @@ public class Main {
         Game game = new Game(numPlayer, deck);
         int counter = 0;
         while (game.getPlayers().size() > 1){
+            // Loop until there is only a player left
             int playerNum = counter%game.getPlayers().size();
-            if(game.getCardDeck().getCardDeckContent().size() == 0)
-            {
+            if(game.getCardDeck().getCardDeckContent().size() == 0) {
                 game.restoreDeck();
             }
             else{
-                game.getPlayers().get(playerNum).playerTurn(game);
+
+                game.getPlayers().get(playerNum).playerTurn(game); // Using the turn for the players
                 counter += 1;
             }
         }

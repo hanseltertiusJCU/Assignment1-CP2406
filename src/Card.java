@@ -2,8 +2,8 @@ public class Card {
     //basic of cards
     private String cardName;
 
-    Card(String n)
-    {
+    Card(String n) {
+        //Constructor of the card
         cardName = n;
     }
 

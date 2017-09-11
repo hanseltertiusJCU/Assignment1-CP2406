@@ -1,38 +1,37 @@
 public class SuperTrumps extends Card{
-    //talk about the supertrump card
 
     SuperTrumps (String n){
-        //constructor
+        //Constructor of Supertrump card
         super (n);
     }
 
-    public String cardEffect()
-    {
-        String cardEffect = "";
+    public String cardEffect() {
+        // Useful for setting up the game mode based on the Supertrump card name
+        String effect = "";
         String n = getCardName();
         if (n.equals("The Mineralogist")){
-            cardEffect = "CLE";
+            effect = "CLE";
         }
         else if (n.equals("The Geologist")){
-            cardEffect = "CHOICE";
+            effect = "CHOICE";
         }
         else if (n.equals("The Geophysicist")){
-            cardEffect = "GRAV/MAG";
+            effect = "GRAV/MAG";
         }
         else if (n.equals("The Gemmologist")){
-            cardEffect = "HARD";
+            effect = "HARD";
         }
         else if (n.equals("The Miner")){
-            cardEffect = "ECO";
+            effect = "ECO";
         }
         else if (n.equals("The Petrologist")){
-            cardEffect = "ABU";
+            effect = "ABU";
         }
-        return cardEffect;
+        return effect;
     }
 
-    public String effectDescription()
-    {
+    public String effectDescription() {
+        // Adding the description to the Supertrump card based on the name
         String desc = "";
         String n = getCardName();
         if (n.equals("The Mineralogist")){

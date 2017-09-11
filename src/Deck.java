@@ -6,12 +6,12 @@ public class Deck {
     private ArrayList<Card> cardDeck;
 
     Deck(ArrayList<Card> listOfcard){
-        //Constructor
+        //Constructor of the Deck
         cardDeck = listOfcard;
     }
 
     public Card drawnCard(){
-
+        //Remove the card when the player drawn the random card (prevent duplicate card)
         int rc = new Random().nextInt(cardDeck.size());
         Card getCard = cardDeck.get(rc);
         cardDeck.remove(rc);
@@ -19,6 +19,7 @@ public class Deck {
     }
 
     public ArrayList<Card> getCardDeckContent() {
+        //Get the contents of the deck
         return cardDeck;
     }
 }

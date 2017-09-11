@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
-    // about the game, which specify the flow of it
     private ArrayList<Card> cardUsed;
     private Deck cardDeck;
     private ArrayList<Player> players;
@@ -10,26 +9,29 @@ public class Game {
     private String recentPlayer;
 
     Game(int playerNum, Deck deck){
+        // Constructor of the game
         gameMode = "";
-        cardUsed = new ArrayList<Card>();
-        players = new ArrayList<Player>();
+        cardUsed = new ArrayList<>();
+        players = new ArrayList<>();
         cardDeck = deck;
         recentPlayer = "";
         for(int p = 0; p < playerNum; p++){
-
+            // Enter the players' name for playerNum times (based on the input)
             System.out.println("Enter player name");
             System.out.print(">>>");
             Scanner playerName = new Scanner(System.in);
             String getPlayerName = playerName.nextLine();
             while (getPlayerName.length() == 0){
+                // Looping when the player has entered the empty string for the name
                 System.out.println("The name cannot be empty!");
                 System.out.println("Enter player name");
                 System.out.print(">>>");
                 getPlayerName = playerName.nextLine();
             }
-            players.add(new Player(getPlayerName));//to be fixed later on
+            players.add(new Player(getPlayerName));
         }
-        for (int h = 0; h < 8; h++){
+        for (int c = 0; c < 8; c++){
+            // Draw the card until the players in the game have 8 card each
             for (Player player : players){
                 player.drawPlayerCard(deck.drawnCard());
             }
@@ -40,8 +42,8 @@ public class Game {
         return gameMode;
     }
 
-    public String getGameModeMessage()
-    {
+    public String getGameModeMessage() {
+        // To specify the game mode
         String gameMsg = "";
         if (gameMode.equals("HARD")){
             gameMsg = "This is a game of hardness";
@@ -65,8 +67,8 @@ public class Game {
         this.gameMode = gameMode;
     }
 
-    public void restoreDeck()
-    {
+    public void restoreDeck() {
+        // To retrieve the card back
         ArrayList<Card> restore = new ArrayList<>();
         for (Card cards: cardUsed)
         {
@@ -82,6 +84,7 @@ public class Game {
     }
 
     public ArrayList<Player> getPlayers(){
+        // Array list of players
         return players;
     }
 
@@ -89,7 +92,8 @@ public class Game {
         return cardUsed.get(cardUsed.size()-1);
     }
 
-    public boolean cardPlayed(){
+    public boolean recentCardPlayed(){
+        // To check whether there is the recent card played or not
         boolean played = false;
         if (cardUsed.size() > 0){
             played = true;
@@ -102,12 +106,11 @@ public class Game {
     }
 
     public boolean gameCard(Card card, Player play){
+        // To get the comparison between the recent card and the card played
         boolean higherScore = false;
         int difference = 0;
-        if(cardUsed.size() == 0 || this.playerGetAnotherTurn(play))
-        {
-            if (card instanceof SuperTrumps)
-            {
+        if(cardUsed.size() == 0 || this.playerGetAnotherTurn(play)) {
+            if (card instanceof SuperTrumps) {
                 gameMode = ((SuperTrumps) card).cardEffect();
             }
             higherScore = true;
@@ -141,8 +144,8 @@ public class Game {
                         Float prev = new Float(((Mineral) getRecentCard()).getCardCleavageScore());
                         difference = now.compareTo(prev);
                     }
-                    if (difference > 0)
-                    {
+                    if (difference > 0) {
+                        // To allow the replacement of the recent card
                         higherScore = true;
                     }
                     else{
@@ -174,12 +177,13 @@ public class Game {
     }
 
     public boolean playerGetAnotherTurn(Player playerGame){
-        boolean another = false;
+        // To check the player that did not passed the card after any other player passed the card
+        boolean anotherTurn = false;
         if (getRecentPlayer().equals(playerGame.getPlayerName()))
         {
-            another = true;
+            anotherTurn = true;
         }
-        return another;
+        return anotherTurn;
     }
 
 }

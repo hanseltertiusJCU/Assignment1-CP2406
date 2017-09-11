@@ -1,6 +1,5 @@
 public class Mineral extends Card{
 
-    //the class is about mineral cards on the deck
     private float cardHardness;
     private float cardSpecGravity;
     private String cardCleavage;
@@ -12,7 +11,7 @@ public class Mineral extends Card{
 
     Mineral(String n, float hardness, float specificGravity, String cleavage, String crystalAbundance, String economicValue)
     {
-        //constructor
+        //Constructor of the Mineral card/ non Supertrump card
         super(n);
         cardHardness = hardness;
         cardSpecGravity = specificGravity;
@@ -56,6 +55,7 @@ public class Mineral extends Card{
     public String getCardEconomicValue() {
         return cardEconomicValue;
     }
+
     public int convertCleavageScore(){
         int cleavageScore = 0;
         String c = getCardCleavage();
